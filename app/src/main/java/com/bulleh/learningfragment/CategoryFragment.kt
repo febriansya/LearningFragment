@@ -12,9 +12,6 @@ class CategoryFragment : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
     }
 
     override fun onCreateView(
@@ -34,7 +31,22 @@ class CategoryFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         if (p0?.id == R.id.btn_detail_category) {
+            val mDetailCategoryFragment = DetailCategoryFragment()
 
+            val mBundle = Bundle()
+            mBundle.putString(DetailCategoryFragment.EXTRA_NAME, "LifeStyle")
+            val description = "Kategori ini akan berisi produk-produk lifestyle"
+
+            mDetailCategoryFragment.arguments = mBundle
+            mDetailCategoryFragment.description = description
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.fragment_container,mDetailCategoryFragment,DetailCategoryFragment::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+
+            }
         }
     }
 }
